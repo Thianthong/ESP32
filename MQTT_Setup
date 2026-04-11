@@ -1,0 +1,33 @@
+#include <WiFi.h>;
+#include <PubSubClient.h>;
+
+// Wifi user&pass
+const char* ssid = "Wokwi_GUEST";           
+const char* password = "";
+
+// MQTT 
+const char* mqtt_user = "Thianthong";
+const char* mqtt_pass = "Man@12345";
+const char* mqtt_server = "10c02f943311455693ac3bafdd2412fa.s1.eu.hivemq.cloud"; 
+const int mqtt_port = 8883;
+
+WiFiClient Thianthong;
+PubSubClient client(Thianthong);
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.println("Hello, ESP32!");
+  WiFi.begin(ssid,password);
+
+  client.setServer(mqtt_server,mqtt_port);
+
+  if (!client.connect("Thianthong", mqtt_user, mqtt_pass)){
+    Serial.println("HiveMQ_connected...");
+  }
+  Serial.println("HiveMQ_connected");
+}
+
+void loop() {
+  
+}
